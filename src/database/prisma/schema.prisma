@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+model Profile {
+  id      Int       @id @default(autoincrement())
+  name    String
+  email   String    @unique
+  phone   String
+  role    Role      @default(CLIENT)
+  Files   File[]
+  Payment Payment[]
+
+  @@map("profile")
+}
+
+model File {
+  id          Int      @id @default(autoincrement())
+  profile     Profile  @relation(fields: [profile_id], references: [id])
+  profile_id  Int      @map("profile_id")
+  file_path   String   @map("file_path")
+  description String   @map("description") @db.VarChar(255)
+  create_at   DateTime @map("create_at")
+
+  @@map("file")
+}
+
+model Payment {
+  id         Int            @id @default(autoincrement())
+  payload_id String         @map("payload_id")
+  profile    Profile        @relation(fields: [profile_id], references: [id])
+  profile_id Int            @map("profile_id")
+  filePath   String         @map("file_path")
+  status     Payment_Status
+  created_at DateTime       @map("created_at")
+
+  @@map("payment")
+}
+
+enum Payment_Status {
+  PENDING
+  PAID
+}
+
+model PaymentStatus {
+  id     Int            @id @default(autoincrement())
+  status Payment_Status @map("payment_status")
+
+  @@map("payment_status")
+}
+
+enum Profile_Roles {
+  ADMIN
+  CLIENT
+}
+
+model ProfileRoles {
+  id   Int           @id @default(autoincrement())
+  role Profile_Roles @map("profile_role")
+
+  @@map("profile_roles")
+}
