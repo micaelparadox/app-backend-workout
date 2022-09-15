@@ -11,6 +11,7 @@ CREATE TYPE "Profile_Roles" AS ENUM ('ADMIN', 'CLIENT');
 CREATE TABLE "profile" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'CLIENT',
@@ -24,7 +25,7 @@ CREATE TABLE "file" (
     "profile_id" INTEGER NOT NULL,
     "file_path" TEXT NOT NULL,
     "description" VARCHAR(255) NOT NULL,
-    "create_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "file_pkey" PRIMARY KEY ("id")
 );

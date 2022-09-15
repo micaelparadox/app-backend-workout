@@ -16,13 +16,14 @@ enum Role {
 }
 
 model Profile {
-  id      Int       @id @default(autoincrement())
-  name    String
-  email   String    @unique
-  phone   String
-  role    Role      @default(CLIENT)
-  Files   File[]
-  Payment Payment[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  password String
+  email    String    @unique
+  phone    String
+  role     Role      @default(CLIENT)
+  Files    File[]
+  Payment  Payment[]
 
   @@map("profile")
 }
@@ -33,7 +34,7 @@ model File {
   profile_id  Int      @map("profile_id")
   file_path   String   @map("file_path")
   description String   @map("description") @db.VarChar(255)
-  create_at   DateTime @map("create_at")
+  created_at  DateTime @map("created_at")
 
   @@map("file")
 }

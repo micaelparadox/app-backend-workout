@@ -14,5 +14,8 @@
   },
   "devDependencies": {
     "prisma": "^4.3.1"
+  },
+  "prisma": {
+    "seed": "node ./prisma/database/seed.js"
   }
 }
