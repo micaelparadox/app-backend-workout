@@ -17,7 +17,7 @@ const load = async () => {
             skipDuplicates: true,
         });
         await prisma.paymentStatus.createMany({
-            data: paymentStatus,
+            data: paymentStatus.status === 'PENDING' | 'PAID',
             skipDuplicates: true,
         });
         await prisma.profileRoles.createMany({

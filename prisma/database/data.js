@@ -1,4 +1,4 @@
-const { Prisma, Payment_Status } = require('@prisma/client');
+const { Prisma, Payment_Status, Profile_Roles } = require('@prisma/client');
 
 const profile = [
     {
@@ -27,7 +27,7 @@ const payment = [
         payload_id: '1234567890',
         profile_id: 1,
         filePath: 'https://www.google.com/image.png',
-        status: Payment_Status.PENDING,
+        status: 'PENDING',
         created_at: new Date(),
     }
 ]
@@ -35,15 +35,14 @@ const payment = [
 const paymentStatus = [
     {
         id: 1,
-        payment_status: 'PENDING',
-        created_at: new Date(),
+        status: Payment_Status.PENDING | Payment_Status.PAID
     }
 ]
 
 const profileRoles = [
     {
         id: 1,
-        profileRole: 'ADMIN',
+        status: Profile_Roles.ADMIN | Profile_Roles.CLIENT
     }
 ]
 
